@@ -10,7 +10,7 @@ __version__ = "0.1.0"
 def pkt_count_kmers(
     seqs: list[c3types.SeqType],
     k: int = 3,
-    count_min_complements: bool = True,
+    count_min_complements: bool = False,
     parallel: bool = False,
 ) -> np.ndarray:
     """compute counts of overlapping k-mers
@@ -50,8 +50,8 @@ def pkt_count_kmers(
 
 @define_app
 def pkt_kmer_header(
-    count_min_complements: bool = True,
     k: int = 3,
+    count_min_complements: bool = False,
 ) -> np.ndarray:
     """returns the numpy string array of the kmers
 
