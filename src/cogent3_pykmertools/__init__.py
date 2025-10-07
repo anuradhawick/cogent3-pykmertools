@@ -33,17 +33,10 @@ def pkt_count_kmers(
     ctr = pkt.OligoComputer(k)
     raw_seqs = [str(seq) for seq in seqs]
     if parallel:
-        counts = ctr.vectorise_batch(
-            raw_seqs, False, count_min_complements
-        )
+        counts = np.array(ctr.vectorise_batch(raw_seqs, False, count_min_complements))
     else:
         counts = np.array(
-            [
-                ctr.vectorise_one(
-                    s, False, count_min_complements
-                )
-                for s in raw_seqs
-            ],
+            [ctr.vectorise_one(s, False, count_min_complements) for s in raw_seqs],
         )
     return counts.astype(int)
 
