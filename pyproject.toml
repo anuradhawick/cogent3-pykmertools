@@ -1,0 +1,44 @@
+[build-system]
+requires = ["flit_core >= 3.4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "cogent3_pykmertools"
+description = "Definition of a cogent3 pykmertools app"
+version = "0.01"
+authors = [
+    { name = "Anuradha Wickramarachchi", email = "anuradhawick@gmail.com"},
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+dependencies = ["cogent3", "pykmertools>=0.2.1"]
+requires-python = ">=3.11,<3.14"
+classifiers = [
+        "Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: GPL3 License",
+        "Topic :: Scientific/Engineering :: Bio-Informatics",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+    ]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+    "nox"
+    ]
+dev = [
+    "ruff",
+    "cogent3_pykmertools[test]",
+    ]
+
+[project.entry-points."cogent3.app"]
+pkt_count_kmers = "cogent3_pykmertools:pkt_count_kmers"
+pkt_kmer_header = "cogent3_pykmertools:pkt_kmer_header"
+
+[project.entry-points."cogent3.hook"]
+count_kmers = "cogent3_pykmertools:pkt_count_kmers"
