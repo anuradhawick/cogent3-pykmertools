@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "cogent3_pykmertools"
-description = "Definition of a cogent3 pykmertools app"
+description = "A cogent3 pykmertools app"
 version = "0.01"
 authors = [
     { name = "Anuradha Wickramarachchi", email = "anuradhawick@gmail.com"},
