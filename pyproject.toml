@@ -11,7 +11,7 @@ authors = [
 ]
 readme = "README.md"
 license = { file = "LICENSE" }
-dependencies = ["cogent3", "pykmertools>=0.2.1"]
+dependencies = ["cogent3>=2025.9.8a4", "pykmertools>=0.2.1"]
 requires-python = ">=3.11,<3.14"
 classifiers = [
         "Development Status :: 2 - Pre-Alpha",
