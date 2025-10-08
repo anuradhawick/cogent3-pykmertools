@@ -2,6 +2,7 @@ import pytest
 import collections
 import cogent3 as c3
 import cogent3_pykmertools as c3pkt
+from numpy.testing import assert_array_equal
 
 
 def test_pkt_count_kmers_installed():
@@ -12,6 +13,16 @@ def test_pkt_count_kmers_installed():
 @pytest.fixture
 def primates():
     return c3.get_dataset("primate-brca1").degap()
+
+
+def test_only_pkt_hook_installed(primates):
+    # more a test of the development environment than anything else
+    seqs = primates
+    k = 2
+    # if only pkt hook installed
+    got1 = seqs.count_kmers(k=k, use_hook=None)
+    got2 = seqs.count_kmers(k=k, use_hook="cogent3_pykmertools")
+    assert_array_equal(got1, got2)
 
 
 @pytest.mark.parametrize("k", [1, 2])
@@ -67,11 +78,11 @@ def test_integration_with_cogent3_seqcoll(primates):
     assert (pkt_counts != c3_counts).any()
     # but then re-order the pkt counts to match c3 counts
     reordered_pkt_counts = pkt_counts[:, pkt_to_c3]
-    assert (reordered_pkt_counts == c3_counts).all()
+    assert_array_equal(reordered_pkt_counts, c3_counts)
 
 
 def test_cogent3_seqcoll_parallel(primates):
     seqs = primates
     serial = seqs.count_kmers(k=2, use_hook="cogent3_pykmertools")
     parallel = seqs.count_kmers(k=2, use_hook="cogent3_pykmertools", parallel=True)
-    assert (serial == parallel).all()
+    assert_array_equal(serial, parallel)
