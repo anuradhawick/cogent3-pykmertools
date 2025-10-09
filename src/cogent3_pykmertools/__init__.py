@@ -3,8 +3,6 @@ from cogent3.app.composable import define_app
 import pykmertools as pkt
 import numpy as np
 
-__version__ = "0.1.0"
-
 
 @define_app
 def pkt_count_kmers(
