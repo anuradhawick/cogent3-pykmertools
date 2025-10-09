@@ -4,14 +4,14 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "cogent3_pykmertools"
-description = "Definition of a cogent3 pykmertools app"
+description = "A cogent3 pykmertools app"
 version = "0.01"
 authors = [
     { name = "Anuradha Wickramarachchi", email = "anuradhawick@gmail.com"},
 ]
 readme = "README.md"
 license = { file = "LICENSE" }
-dependencies = ["cogent3", "pykmertools>=0.2.1"]
+dependencies = ["cogent3>=2025.9.8a4", "pykmertools>=0.2.1"]
 requires-python = ">=3.11,<3.14"
 classifiers = [
         "Development Status :: 2 - Pre-Alpha",
