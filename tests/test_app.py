@@ -1,6 +1,7 @@
 import pytest
 import collections
 import cogent3 as c3
+from cogent3.app.composable import NotCompleted
 import cogent3_pykmertools as c3pkt
 from numpy.testing import assert_array_equal
 
@@ -45,6 +46,19 @@ def test_pkt_count_kmers(k):
     # filter out zero counts
     result = {h: c for h, c in zip(header, counts, strict=True) if c}
     assert result == expect
+
+
+def test_pkt_count_kmers_invalid():
+    data = "AACGTTTCG"
+    seq = c3.make_seq(data, moltype="dna")
+    # make sure returns NotCompleted in invalid input
+    app = c3pkt.pkt_count_kmers(k=2)
+    result = app(seq)
+    assert isinstance(result, NotCompleted)
+    result = app(data)
+    assert isinstance(result, NotCompleted)
+    result = app([data])
+    assert isinstance(result, NotCompleted)
 
 
 def test_integration_with_cogent3_seq(primates):

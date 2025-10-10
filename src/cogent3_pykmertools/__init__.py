@@ -1,5 +1,5 @@
 from cogent3.app import typing as c3types
-from cogent3.app.composable import define_app
+from cogent3.app.composable import define_app, AppType, NotCompleted
 import pykmertools as pkt
 import numpy as np
 
@@ -28,6 +28,16 @@ def pkt_count_kmers(
     -------
         a 2D array of k-mer counts
     """
+    if not isinstance(seqs, list):
+        # cogent3 app type checking has a bug, so we need 
+        # to do this check here
+        return NotCompleted(
+            "FAIL",
+            origin="pkt_count_kmers",
+            message="input must be a list of cogent3 sequences",
+            source=seqs,
+        )
+
     ctr = pkt.OligoComputer(k)
     raw_seqs = [str(seq) for seq in seqs]
     if parallel:
@@ -39,7 +49,7 @@ def pkt_count_kmers(
     return counts.astype(int)
 
 
-@define_app
+@define_app(app_type=AppType.NON_COMPOSABLE)
 def pkt_kmer_header(
     k: int = 3,
     count_min_complements: bool = False,
